@@ -1,11 +1,16 @@
-#include "disk_manager.h"
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <cstdlib>
-#include <ctime>
-#include <algorithm>
-#include <cctype>
+#include <iostream>  // Maneja entrada y salida estándar
+#include <string>    // Manipula cadenas de texto
+#include <sstream>   // Convierte entre tipos de datos y cadenas
+#include <cstdlib>   // Proporciona funciones generales como rand() y conversiones de cadenas a números
+#include <ctime>     // Trabaja con fechas y horas
+#include <algorithm> // Proporciona algoritmos para manipular colecciones de datos.
+#include <cctype>    // Funciones para manipular caracteres
+#include "structures.h" // Define estructuras de datos personalizadas
+#include "mkdisk.h" 
+#include "rmdisk.h"    
+#include "fdisk.h"     
+#include "mount.h"     
+
 
 // Función para convertir string a minúsculas
 std::string toLowerCase(const std::string& str) {
@@ -113,7 +118,7 @@ std::string executeCommand(const std::string& commandLine) {
             return "Error: unit debe ser 'k' (kilobytes) o 'm' (megabytes)";
         }
 
-        return DiskManager::mkdisk(size, unit, path);
+        return CommandMkdisk::execute(size, unit, path);
 
     } else if (cmd == "rmdisk") {
         std::string path = parseParameter(commandLine, "-path");
@@ -123,17 +128,7 @@ std::string executeCommand(const std::string& commandLine) {
                    "Uso: rmdisk -path=ruta";
         }
 
-        return DiskManager::rmdisk(path);
-
-    } else if (cmd == "info") {
-        std::string path = parseParameter(commandLine, "-path");
-
-        if (path.empty()) {
-            return "Error: info requiere parámetro -path\n"
-                   "Uso: info -path=ruta";
-        }
-
-        return DiskManager::getDiskInfo(path);
+        return CommandRmdisk::execute(path);
 
     } else if (cmd == "fdisk") {
         std::string path = parseParameter(commandLine, "-path");
@@ -149,7 +144,7 @@ std::string executeCommand(const std::string& commandLine) {
 
         // Si es operación de eliminación
         if (!deleteName.empty()) {
-            return DiskManager::fdisk(0, "", path, "", "", deleteName, "");
+            return CommandFdisk::execute(0, "", path, "", "", deleteName, "");
         }
 
         // Si es operación de adición
@@ -201,7 +196,22 @@ std::string executeCommand(const std::string& commandLine) {
             fit = toLowerCase(fit);
         }
 
-        return DiskManager::fdisk(size, unit, path, type, fit, "", name);
+        return CommandFdisk::execute(size, unit, path, type, fit, "", name);
+
+    } else if (cmd == "mount") {
+        std::string path = parseParameter(commandLine, "-path");
+        std::string name = parseParameter(commandLine, "-name");
+        
+        if (path.empty() || name.empty()) {
+            return "Error: mount requiere parámetros -path y -name\n"
+                   "Uso: mount -path=ruta -name=nombre";
+        }
+        
+        return CommandMount::execute(path, name);
+
+    } else if (cmd == "mounted") {
+        // Mostrar todas las particiones montadas
+        return CommandMount::listMountedPartitions();
 
     } else if (cmd == "exit" || cmd == "quit") {
         return "EXIT";
