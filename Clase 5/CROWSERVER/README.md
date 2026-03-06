@@ -90,10 +90,3 @@ curl -X POST http://localhost:8081/mkdisk \
 
 ## Probar el Servidor
 
-```bash
-# Terminal 1: Ejecutar servidor
-./server
-
-# Terminal 2: Probar el script de prueba
-./prueba_sin_extendidas.sh
-```
