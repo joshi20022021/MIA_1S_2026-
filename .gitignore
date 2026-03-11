@@ -1,0 +1,27 @@
+# Ignorar la carpeta Clase 7 (trabajo en progreso)
+Clase 7/
+
+# Archivos de compilación
+*.o
+*.out
+*.exe
+
+# Archivos temporales
+*.tmp
+*.swp
+*.swo
+*~
+
+# Archivos de disco virtual
+*.dsk
+*.mia
+
+# Reportes generados
+*.jpg
+*.png
+*.svg
+*.pdf
+*.txt
+
+# Directorios de pruebas
+Calificacion_MIA/
