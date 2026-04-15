@@ -1,0 +1,214 @@
+# Calificacion Clase 10 - Journaling
+# 1S 2026
+# Cambiar joshipanda2002 -> por el usuario de su distribucion de linux
+# Cambiar "34" -> por los ultimos dos digitos de su carnet
+
+#----------------- 1. MKDISK -----------------
+#----------------- MKDISK CON ERROR -----------------
+mkdisk -param=x -size=30 -path=/hom e/joshipanda2002/Calificacion_MIA/Discos/DiscoN.mia
+mkdisk -tamaño=3000 -unit=K -path=/home/joshipanda2002/Calificacion_MIA/Discos/DiscoN.mia
+
+#----------------- CREACION DE DISCOS -----------------
+# 50M A
+mkdisk -size=50 -unit=M -fit=FF -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia
+# 50M B
+mkdisk -unit=k -size=51200 -fit=BF -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco2.mia
+# 13M C
+mkdisk -size=13 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco3.mia
+# 50M D
+mkdisk -size=51200 -unit=K -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco4.mia
+# 20M E
+mkdisk -size=20 -unit=M -fit=WF -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco5.mia
+
+# Discos a borrar
+mkdisk -size=50 -unit=M -fit=FF -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco6.mia
+mkdisk -size=50 -unit=M -fit=FF -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco7.mia
+mkdisk -size=51200 -unit=K -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco8.mia
+mkdisk -size=51200 -unit=K -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco9.mia
+mkdisk -size=51200 -unit=K -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco10.mia
+
+mkdisk -size=100 -unit=M -fit=FF -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco11.mia
+mkdisk -size=75 -unit=M -fit=BF -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco12.mia
+
+#----------------- 2. RMDISK -----------------
+# ERROR DISCO NO EXISTE
+rmdisk -path=/home/joshipanda2002/Calificacion_MIA/Discos/DiscoN.mia
+
+# BORRANDO DISCOS
+rmdisk -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco6.mia
+rmdisk -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco7.mia
+rmdisk -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco8.mia
+rmdisk -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco9.mia
+rmdisk -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco10.mia
+rmdisk -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco12.mia
+
+#----------------- 3. FDISK -----------------
+# ERROR RUTA NO ENCONTRADA
+fdisk -type=P -unit=b -name=PartErr -size=10485760 -path=/home/joshipanda2002/Calificacion_MIA/Discos/DiscoN.mia -fit=BF
+
+# DISCO 1 - 4 primarias de 10M cada una
+fdisk -type=P -unit=b -name=Part11 -size=10485760 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia -fit=BF
+fdisk -type=P -unit=k -name=Part12 -size=10240 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia -fit=BF
+fdisk -type=P -unit=M -name=Part13 -size=10 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia -fit=BF
+fdisk -type=P -unit=b -name=Part14 -size=10485760 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia -fit=BF
+
+# ERROR LIMITE PARTICION PRIMARIA
+fdisk -type=P -unit=b -name=PartErr -size=10485760 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia -fit=BF
+
+# DISCO 3
+# ERROR FALTA ESPACIO
+fdisk -type=P -unit=m -name=PartErr -size=20 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco3.mia
+fdisk -type=P -unit=m -name=Part31 -size=4 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco3.mia
+fdisk -type=P -unit=m -name=Part32 -size=4 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco3.mia
+fdisk -type=P -unit=m -name=Part33 -size=1 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco3.mia
+
+# DISCO 2
+fdisk -type=P -unit=M -name=Part21 -size=10 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco2.mia -fit=FF
+fdisk -type=E -unit=M -name=Part22 -size=20 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco2.mia -fit=FF
+fdisk -type=L -unit=M -name=Part23 -size=5 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco2.mia -fit=FF
+fdisk -type=L -unit=M -name=Part24 -size=5 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco2.mia -fit=FF
+
+fdisk -type=P -unit=M -name=Part11_1 -size=25 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco11.mia -fit=BF
+fdisk -type=P -unit=M -name=Part11_2 -size=25 -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco11.mia -fit=BF
+
+#----------------- MOUNT -----------------
+# DISCO 1
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia -name=Part11
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia -name=Part12
+
+# ERROR PARTICION YA MONTADA
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco1.mia -name=Part11
+
+# DISCO 3
+# ERROR PARTICION NO EXISTE
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco3.mia -name=Part0
+
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco3.mia -name=Part31
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco3.mia -name=Part32
+
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco2.mia -name=Part21
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco2.mia -name=Part23
+mount -path=/home/joshipanda2002/Calificacion_MIA/Discos/Disco11.mia -name=Part11_1
+
+# ENLISTAR MONTADAS
+mounted
+
+#----------------- 5. MKFS -----------------
+mkfs -type=full -id=341A
+mkfs -type=full -id=341C
+mkfs -type=full -id=341D
+
+#----------------- 7. LOGIN -----------------
+login -user=root -pass=123 -id=341A
+
+# ERROR SESION YA INICIADA
+login -user=root -pass=123 -id=341A
+
+#----------------- 9. MKGRP -----------------
+mkgrp -name=usuarios
+mkgrp -name=adm
+mkgrp -name=mail
+mkgrp -name=news
+mkgrp -name=sys
+
+# ERROR YA EXISTE EL GRUPO
+mkgrp -name=sys
+
+#----------------- 6. CAT -----------------
+cat -file1=/users.txt
+
+#----------------- 10. RMGRP -----------------
+rmgrp -name=mail
+
+cat -file1=/users.txt
+
+#----------------- 11. MKUSR -----------------
+mkusr -user="usuario1" -pass=password -grp=root
+mkusr -user="user1" -pass=abc -grp=usuarios
+mkusr -user="user2" -pass=abc -grp=usuarios
+
+# ERROR USUARIO YA EXISTE
+mkusr -user="user2" -pass=abc -grp=usuarios
+
+# ERROR GRUPO NO EXISTE
+mkusr -user="user3" -pass=abc -grp=system
+
+cat -file1=/users.txt
+
+#----------------- 13. CHGRP -----------------
+chgrp -user=user2 -grp=adm
+
+cat -file1=/users.txt
+
+#----------------- 12. RMUSR -----------------
+rmusr -user=user2
+
+cat -file1=/users.txt
+
+#----------------- 15. MKDIR -----------------
+mkdir -path=/bin
+
+# ERROR NO EXISTEN LAS CARPETAS PADRES
+mkdir -path="/home/archivos/archivos 24"
+
+mkdir -p -path=/home/archivos/user/docs/usac
+mkdir -p -path=/home/archivos/carpeta1/carpeta2/carpeta3/carpeta4/carpeta5
+
+#----------------- 14. MKFILE -----------------
+mkfile -path=/home/archivos/user/docs/Tarea.txt -size=75
+mkfile -path=/home/archivos/user/docs/Tarea2.txt -size=768
+
+# Cambiar la ruta de -cont por la ruta real del archivo en tu maquina
+mkfile -path=/home/archivos/user/docs/Tarea3.txt -size=10 -cont=/home/joshipanda2002/Calificacion_MIA/CONT/NAME.txt
+
+# ERROR NO EXISTE RUTA
+mkfile -path="/home/archivos/noexiste/b1.txt"
+
+# ERROR TAMANIO NEGATIVO
+mkfile -path="/home/archivos/b1.txt" -size=-45
+
+# RECURSIVO
+mkfile -r -path=/home/archivos/user/docs/usac/archivos/proyectos/fase1/entrada.txt
+
+cat -file1=/home/archivos/user/docs/Tarea2.txt
+cat -file1=/home/archivos/user/docs/Tarea3.txt
+
+#----------------- 8. LOGOUT -----------------
+logout
+
+# ERROR NO HAY SESION
+logout
+
+#----------------- LOGIN CON USUARIO CREADO -----------------
+login -user=user1 -pass=abc -id=341A
+mkdir -p -path=/home/archivos/user1/mis_documentos
+mkfile -path=/home/archivos/user1/mis_documentos/notas.txt -size=100
+cat -file1=/home/archivos/user1/mis_documentos/notas.txt
+logout
+
+#----------------- LOGIN EN OTRA PARTICION (341C) -----------------
+login -user=root -pass=123 -id=341C
+mkgrp -name=ventas
+mkgrp -name=marketing
+mkusr -user="vendedor1" -pass=pass1 -grp=ventas
+mkusr -user="mark1" -pass=pass2 -grp=marketing
+
+mkdir -p -path=/entradas/ventas/2026/enero
+mkdir -p -path=/entradas/ventas/2026/febrero
+mkdir -p -path=/entradas/marketing/campanas
+
+mkfile -path=/entradas/ventas/2026/enero/reporte_ventas.txt -size=200
+mkfile -path=/entradas/ventas/2026/febrero/reporte_ventas.txt -size=300
+mkfile -path=/entradas/marketing/campanas/ideas.txt -size=150
+
+cat -file1=/entradas/ventas/2026/enero/reporte_ventas.txt
+cat -file1=/entradas/marketing/campanas/ideas.txt
+cat -file1=/users.txt
+logout
+
+#----------------- JOURNALING -----------------
+# Se muestra en consola, no genera archivo
+journaling -id=341A
+journaling -id=341C
+
+exit
